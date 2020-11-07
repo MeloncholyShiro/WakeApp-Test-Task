@@ -1,0 +1,40 @@
+:root {
+    --text-size-banner-title: 43px;
+    --text-size-banner-description: 28px;
+}
+
+.banner {
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    max-width: 410px;
+    padding-left: 53px;
+    padding-bottom: 127px;
+
+    &__title {
+        font-size: var(--text-size-banner-title);
+        margin-bottom: 12px;
+        line-height: 47px;
+    }
+
+    &__description {
+        font-size: var(--text-size-banner-description);
+        margin-bottom: 22px;
+        line-height: 33px;
+    }
+
+    &__action {
+        padding: 0;
+        border: none;
+        color: inherit;
+        text-transform: inherit;
+        background-color: var(--color-action);
+        cursor: pointer;
+        width: 217px;
+        height: 72px;
+
+        &:active{
+            
+        }
+    }
+}

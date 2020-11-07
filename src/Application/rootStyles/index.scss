@@ -1,0 +1,16 @@
+@import '~normalize.css';
+@import './resets.scss';
+@import '~typeface-montserrat';
+
+body {
+    font-family: -apple-system, 'Montserrat', sans-serif, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-background);
+}
+
+:root {
+    --color-background: #060e2b;
+    --color-action: #F3B233;
+}
