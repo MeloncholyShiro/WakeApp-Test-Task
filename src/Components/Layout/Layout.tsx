@@ -12,13 +12,11 @@ type TLayout = React.FC<ILayoutProps>;
 export const Layout: TLayout = ({ children }: ILayoutProps) => {
     return (
         <>
-            <div className={classes['banner-bg']}>
-                <header className={classes.header}>
-                    <Logotype />
-                </header>
+            <header className={classes.header}>
+                <Logotype />
                 <Banner />
-            </div>
-            <main>{children}</main>
+            </header>
+            <main className={classes.main}>{children}</main>
         </>
     );
 };
