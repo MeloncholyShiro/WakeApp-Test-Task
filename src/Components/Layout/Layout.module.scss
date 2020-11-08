@@ -1,0 +1,12 @@
+.header {
+    margin-bottom: 23px;
+    background: right/contain no-repeat url(./Images/banner.jpg);
+
+    @media screen and (max-width: 1024px) {
+        background-image: none;
+    }
+}
+
+.main {
+    padding: 0 17px 60px 16px;
+}

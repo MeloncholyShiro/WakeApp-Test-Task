@@ -1,0 +1,10 @@
+.logotype {
+    padding-left: 16px;
+    padding-top: 26px;
+    margin-bottom: 187px;
+
+    @media screen and (max-width: 1024px) {
+        margin: 0 auto 80px auto;
+        padding-left: 0;
+    }
+}

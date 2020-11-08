@@ -1,0 +1,31 @@
+.games {
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 194px);
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+
+    &__item {
+        width: 194px;
+        height: 195px;
+    }
+
+    &__action {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+
+        &:focus,
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: translateY(3px);
+        }
+    }
+}
