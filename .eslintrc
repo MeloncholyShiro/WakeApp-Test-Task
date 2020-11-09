@@ -43,6 +43,7 @@
         "no-restricted-syntax": "off",
         "react/state-in-constructor": "off",
         "unicorn/no-null": "off",
+        "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }],
         "react/require-default-props": [
             "warn",
             {
