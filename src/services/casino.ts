@@ -1,22 +1,5 @@
 import { fetchRejectRepeater } from '../utils/RejectRepeater';
 
-/* eslint-disable @typescript-eslint/require-await */
-const MAIN_URL = new URL('https://57d10932-44d0-4d3a-98a9-6dda8c67bdd3.mock.pstmn.io');
-MAIN_URL.searchParams.set('limit', '25');
-
-const someShit = {
-    allGames: [],
-    topGames: ['is_most_popular', 'true'],
-    liveCasino: [
-        ['categories', 'Live Casino'],
-        ['liveCasinoOnly', 'true'],
-    ],
-    slotGames: ['categories', 'Slot'],
-    roulette: ['categories', 'Roulette'],
-    tableGames: ['categories', 'Scratch Games'], // Взял что угодно
-    cardGames: ['categories', 'Card Games'],
-} as const;
-
 const responseDataMockForType = {
     application_name: 'European Roulette Pro',
     aspect: '1024X768',
@@ -79,16 +62,36 @@ const responseDataMockForType = {
     statistics: true,
     studio: 'GVG',
     volatility: '',
-} as never;
+};
 
-export type TCategoryNames = keyof typeof someShit;
+const MAIN_URL = new URL('https://57d10932-44d0-4d3a-98a9-6dda8c67bdd3.mock.pstmn.io');
+MAIN_URL.searchParams.set('liveCasinoOnly', 'true');
+MAIN_URL.searchParams.append('limit', '12');
 
-export const FetchCategoryByName = async (categoryName: TCategoryNames): Promise<typeof responseDataMockForType[]> => {
-    if (!someShit[categoryName]) throw new Error('Unexpected Category Name');
+const configureCategoriesRequests = {
+    allGames: [
+        ['is_most_popular', 'true'],
+        ['categories', 'Live Casino,Slot,Roulette,Scratch Games,Card Games'], // Либо я дебил, либо API реально всегда возвращает только рулетки.
+    ],
+    topGames: ['is_most_popular', 'true'],
+    liveCasino: ['categories', 'Live Casino'],
+    slotGames: ['categories', 'Slot'],
+    roulette: ['categories', 'Roulette'],
+    tableGames: ['categories', 'Scratch Games'], // Взял что угодно
+    cardGames: ['categories', 'Card Games'],
+} as const;
+
+export type TCategoryNames = keyof typeof configureCategoriesRequests;
+
+export type TGamesListResponse = typeof responseDataMockForType;
+
+export const FetchCategoryByName = async (categoryName: TCategoryNames): Promise<TGamesListResponse[]> => {
+    const getParametersByCategoryName = configureCategoriesRequests[categoryName];
+    if (!getParametersByCategoryName) throw new Error('Unexpected Category Name');
 
     const MAIN_URL_COPY = new URL(MAIN_URL.href);
 
-    const prepareQueryParametersToAppend = someShit[categoryName].flat(1);
+    const prepareQueryParametersToAppend = getParametersByCategoryName.flat(1);
 
     for (let index = 0; index < prepareQueryParametersToAppend.length; index += 2) {
         MAIN_URL_COPY.searchParams.append(
@@ -99,5 +102,5 @@ export const FetchCategoryByName = async (categoryName: TCategoryNames): Promise
 
     const response = await fetchRejectRepeater(MAIN_URL_COPY.href)();
 
-    return response.json() as Promise<typeof responseDataMockForType[]>;
+    return response.json() as Promise<TGamesListResponse[]>;
 };

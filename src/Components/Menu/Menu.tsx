@@ -15,7 +15,7 @@ export const Menu: TMenu = ({ updateCurrentSection, currentSection }: IMenuProps
     const shouldMenuRender = useBreakpointUp(1250);
 
     if (!shouldMenuRender) {
-        return null;
+        return null; // В ТЗ : "Для раздела Top games (разделы только в десктоп-версии)"
     }
 
     return (
@@ -27,7 +27,7 @@ export const Menu: TMenu = ({ updateCurrentSection, currentSection }: IMenuProps
                             className={classes.navigation__item}
                             style={{
                                 backgroundImage: `url(${item.icon})`,
-                                borderBottom: currentSection === item.name ? '2px solid #F3B233' : undefined,
+                                borderBottom: currentSection === item.name ? '2px solid #F3B233' : undefined, // HardCode :D
                             }}
                             key={item.key}
                         >
